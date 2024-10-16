@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/productModel.dart';
@@ -26,10 +27,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.network(
-                  widget.product.image,
+                child:  CachedNetworkImage(
+                  imageUrl: widget.product.image,
                   height: 200,
-                  width: 200,
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()), // Show a loading indicator
+                  errorWidget: (context, url, error) => const Icon(Icons.error), // Show an error icon if image fails to load
                   fit: BoxFit.contain,
                 ),
               ),
