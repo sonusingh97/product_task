@@ -1,13 +1,12 @@
 import 'dart:convert';
 
+import '../constant/apiUrl.dart';
 import '../model/productModel.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String apiUrl = 'https://fakestoreapi.com/products';
-
   Future<List<ProductModel>> fetchProducts() async {
-    final response = await http.get(Uri.parse(apiUrl));
+    final response = await http.get(Uri.parse(ApiConstant.productApi));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonData = json.decode(response.body);
